@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="yeonan">
+	<insert id="yeonan.insertYeonanDEFAULT" parameterClass="java.util.HashMap">
+		INSERT ALL
+			 INTO KOEM_YEONAN
+			(
+				 SEA_NAM
+				,CST_NAM
+				,STA_NAM
+				,OBS_DAT
+				,WTEMP_S
+				,WTEMP_B
+				,SALT_S
+				,SALT_B
+				,PH_S
+				,PH_B
+				,DO_S
+				,DO_B
+				,COD_S
+				,COD_B
+				,NH4N_S
+				,NH4N_B
+				,NO2N_S
+				,NO2N_B
+				,NO3N_S
+				,NO3N_B
+				,DIN_S
+				,DIN_B
+				,TN_S
+				,TN_B
+				,DIP_S
+				,DIP_B
+				,TP_S
+				,TP_B
+				,SIO2_S
+				,SIO2_B
+				,SS_S
+				,SS_B
+				,CHLA_S
+				,CHLA_B
+				,SPM_S
+				,SPM_B
+				,TRANS
+				,STA_CDE
+				,WEATHER
+			)
+			<iterate property="yeonanList" conjunction=" union all ">
+			SELECT
+				 '$yeonanList[].SEA_NAM$'                      AS SEA_NAM
+				,'$yeonanList[].CST_NAM$'                      AS CST_NAM
+				,'$yeonanList[].STA_NAM$'                      AS STA_NAM
+				,TO_DATE('$yeonanList[].OBS_DAT$','YYYY-MM')   AS OBS_DAT
+				,'$yeonanList[].WTEMP_S$'                      AS WTEMP_S
+				,'$yeonanList[].WTEMP_B$'                      AS WTEMP_B
+				,'$yeonanList[].SALT_S$'                       AS SALT_S
+				,'$yeonanList[].SALT_B$'                       AS SALT_B
+				,'$yeonanList[].PH_S$'                         AS PH_S
+				,'$yeonanList[].PH_B$'                         AS PH_B
+				,'$yeonanList[].DO_S$'                         AS DO_S
+				,'$yeonanList[].DO_B$'                         AS DO_B
+				,'$yeonanList[].COD_S$'                        AS COD_S
+				,'$yeonanList[].COD_B$'                        AS COD_B
+				,'$yeonanList[].NH4N_S$'                       AS NH4N_S
+				,'$yeonanList[].NH4N_B$'                       AS NH4N_B
+				,'$yeonanList[].NO2N_S$'                       AS NO2N_S
+				,'$yeonanList[].NO2N_B$'                       AS NO2N_B
+				,'$yeonanList[].NO3N_S$'                       AS NO3N_S
+				,'$yeonanList[].NO3N_B$'                       AS NO3N_B
+				,'$yeonanList[].DIN_S$'                        AS DIN_S
+				,'$yeonanList[].DIN_B$'                        AS DIN_B
+				,'$yeonanList[].TN_S$'                         AS TN_S
+				,'$yeonanList[].TN_B$'                         AS TN_B
+				,'$yeonanList[].DIP_S$'                        AS DIP_S
+				,'$yeonanList[].DIP_B$'                        AS DIP_B
+				,'$yeonanList[].TP_S$'                         AS TP_S
+				,'$yeonanList[].TP_B$'                         AS TP_B
+				,'$yeonanList[].SIO2_S$'                       AS SIO2_S
+				,'$yeonanList[].SIO2_B$'                       AS SIO2_B
+				,'$yeonanList[].SS_S$'                         AS SS_S
+				,'$yeonanList[].SS_B$'                         AS SS_B
+				,'$yeonanList[].CHLA_S$'                       AS CHLA_S
+				,'$yeonanList[].CHLA_B$'                       AS CHLA_B
+				,'$yeonanList[].SPM_S$'                        AS SPM_S
+				,'$yeonanList[].SPM_B$'                        AS SPM_B
+				,'$yeonanList[].TRANS$'                        AS TRANS
+				,'$yeonanList[].STA_CDE$'                      AS STA_CDE
+				,'$yeonanList[].WEATHER$'                      AS WEATHER
+			FROM DUAL
+			</iterate>
+	</insert>
+	
+	
+	<insert id="yeonan.insertYeonan" parameterClass="java.util.HashMap">
+		INSERT ALL
+			 INTO "SMG_WORK"."TB_WTR_SEA_NEW_DATA"
+			(
+				 ZCODE
+				,ZNAME
+				,SITE_DATE_YEAR
+				,SITE_DATE_MON
+				,SITE_DATE_DAY
+				,WATERS
+				,COAST
+				,TM_X
+				,TM_Y
+				,LAYER_DPTH
+				,ITEM_WTEMP
+				,ITEM_PSU
+				,ITEM_PH
+				,ITEM_DO
+				,ITEM_COD
+				,ITEM_NH3_N
+				,ITEM_NO2_N
+				,ITEM_NO3_N
+				,ITEM_DIN
+				,ITEM_TN
+				,ITEM_DIP
+				,ITEM_TP
+				,ITEM_SIO2
+				,ITEM_SS
+				,ITEM_CLOA
+				,ITEM_OIL
+			)
+			<iterate property="yeonanList" conjunction=" union all ">
+			
+				SELECT
+					 SUBSTR('$yeonanList[].STA_CDE$',1,2)||'-'||SUBSTR('$yeonanList[].STA_CDE$',3,2)||'-'||SUBSTR('$yeonanList[].STA_CDE$',-2)          AS ZCODE
+					,'$yeonanList[].STA_NAM$'          					AS ZNAME
+					,SUBSTR('$yeonanList[].OBS_DAT$',1,4)          		AS SITE_DATE_YEAR
+					,SUBSTR('$yeonanList[].OBS_DAT$',6,2) 		        AS SITE_DATE_MON
+					,'' 										        AS SITE_DATE_DAY
+					,'$yeonanList[].SEA_NAM$'					        AS WATERS
+					,'$yeonanList[].CST_NAM$'		                    AS COAST
+					,''                     							AS TM_X
+					,''                     							AS TM_Y
+					,'표층'							                    AS LAYER_DPTH
+					,'$yeonanList[].WTEMP_S$'		                    AS ITEM_WTEMP
+					,'$yeonanList[].SALT_S$'                            AS ITEM_PSU
+					,'$yeonanList[].PH_S$'                             	AS ITEM_PH
+					,'$yeonanList[].DO_S$'                            	AS ITEM_DO
+					,'$yeonanList[].COD_S$'                          	AS ITEM_COD
+					,'$yeonanList[].NH4N_S$'                            AS ITEM_NH3_N
+					,'$yeonanList[].NO2N_S$'                            AS ITEM_NO2_N
+					,'$yeonanList[].NO3N_S$'                            AS ITEM_NO3_N
+					,'$yeonanList[].DIN_S$'                           	AS ITEM_DIN
+					,'$yeonanList[].TN_S$'                             	AS ITEM_TN
+					,'$yeonanList[].DIP_S$'                            	AS ITEM_DIP
+					,'$yeonanList[].TP_S$'                             	AS ITEM_TP
+					,'$yeonanList[].SIO2_S$'                            AS ITEM_SIO2
+					,'$yeonanList[].SS_S$'                             	AS ITEM_SS
+					,'$yeonanList[].CHLA_S$'                            AS ITEM_CLOA
+					,'$yeonanList[].SPM_S$'                            	AS ITEM_OIL
+				FROM DUAL
+
+			UNION ALL
+			
+				SELECT
+					 SUBSTR('$yeonanList[].STA_CDE$',1,2)||'-'||SUBSTR('$yeonanList[].STA_CDE$',3,2)||'-'||SUBSTR('$yeonanList[].STA_CDE$',-2)          AS ZCODE
+					,'$yeonanList[].STA_NAM$'          					AS ZNAME
+					,SUBSTR('$yeonanList[].OBS_DAT$',1,4)          		AS SITE_DATE_YEAR
+					,SUBSTR('$yeonanList[].OBS_DAT$',6,2) 		        AS SITE_DATE_MON
+					,'' 										        AS SITE_DATE_DAY
+					,'$yeonanList[].SEA_NAM$'					        AS WATERS
+					,'$yeonanList[].CST_NAM$'		                    AS COAST
+					,''                     							AS TM_X
+					,''                     							AS TM_Y
+					,'저층'							                    AS LAYER_DPTH
+					,'$yeonanList[].WTEMP_B$'		                    AS ITEM_WTEMP
+					,'$yeonanList[].SALT_B$'                            AS ITEM_PSU
+					,'$yeonanList[].PH_B$'                             	AS ITEM_PH
+					,'$yeonanList[].DO_B$'                            	AS ITEM_DO
+					,'$yeonanList[].COD_B$'                          	AS ITEM_COD
+					,'$yeonanList[].NH4N_B$'                            AS ITEM_NH3_N
+					,'$yeonanList[].NO2N_B$'                            AS ITEM_NO2_N
+					,'$yeonanList[].NO3N_B$'                            AS ITEM_NO3_N
+					,'$yeonanList[].DIN_B$'                           	AS ITEM_DIN
+					,'$yeonanList[].TN_B$'                             	AS ITEM_TN
+					,'$yeonanList[].DIP_B$'                            	AS ITEM_DIP
+					,'$yeonanList[].TP_B$'                             	AS ITEM_TP
+					,'$yeonanList[].SIO2_B$'                            AS ITEM_SIO2
+					,'$yeonanList[].SS_B$'                             	AS ITEM_SS
+					,'$yeonanList[].CHLA_B$'                            AS ITEM_CLOA
+					,'$yeonanList[].SPM_B$'                            	AS ITEM_OIL
+				FROM DUAL
+			
+			</iterate>
+			COMMIT
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</sqlMap>

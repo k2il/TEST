@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<!--  not used  -->
+
+<sqlMapConfig>
+   	<settings useStatementNamespaces="true" cacheModelsEnabled="false"/>
+	<typeAlias alias="paramMap" type="java.util.Map" />
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+   	<typeAlias type="com.ibatis.sqlmap.engine.type.ClobTypeHandlerCallback" alias="clobHanlder"  />
+	<typeAlias alias="JSONObject" type="net.sf.json.JSONObject"/>
+	
+	<sqlMap resource="egovframework/sql_temp/temp_SQL.xml" />
+
+<!--  /not used  -->
+	
+</sqlMapConfig>
+	

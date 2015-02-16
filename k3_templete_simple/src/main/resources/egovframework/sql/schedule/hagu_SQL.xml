@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="hagu">
+	<insert id="hagu.insertHagu" parameterClass="java.util.HashMap">
+		INSERT ALL
+			 INTO KOEM_HAGU
+			(
+				 STA_CDE
+				,OBS_DAT
+				,STA_NAM
+				,PH
+				,COD
+				,NTU
+				,WTEMP
+				,DOX
+				,SALINITY
+			)
+			
+			<iterate property="haguList" conjunction=" union all ">
+			SELECT
+			 	'$haguList[].STA_CDE$' 								   AS STA_CDE
+				,TO_DATE('$haguList[].OBS_DAT$','YYYY-MM-DD HH24:MI')  AS OBS_DAT
+				,'$haguList[].STA_NAM$' 							   AS STA_NAM
+				,'$haguList[].PH$'									   AS PH
+				,'$haguList[].COD$'									   AS COD
+				,'$haguList[].NTU$' 								   AS NTU
+				,'$haguList[].WTEMP$' 								   AS WTEMP
+				,'$haguList[].DOX$' 								   AS DOX
+				,'$haguList[].SALINITY$' 							   AS SALINITY
+			FROM DUAL
+			</iterate>
+	</insert>
+
+</sqlMap>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="mobile">
+	<select id="common.pidToSqlIdMapper" parameterClass="Map" resultClass="String">
+	    <!-- 
+		    CREATE TABLE "SMG_HOME"."TB_PID_TO" 
+			(	
+			"PID_SEQ" NUMBER, 
+			"P_ID" CHAR(9 BYTE), 
+			"SQL_ID" VARCHAR2(100 BYTE), 
+			"MEMO" VARCHAR2(1000 BYTE), 
+			"CNT_YN" CHAR(1 BYTE) DEFAULT 'N', 
+			"CREATE_DATE" DATE DEFAULT SYSDATE, 
+			 CONSTRAINT "TB_PID_TO_PK" PRIMARY KEY ("PID_SEQ")
+			) ;
+		
+		  COMMENT ON COLUMN "SMG_HOME"."TB_PID_TO"."PID_SEQ" IS '코드 ( (서비스명(대분류)AA, 중분류 00, 소분류 00, 프로세스 000))';
+		
+		  COMMENT ON COLUMN "SMG_HOME"."TB_PID_TO"."P_ID" IS 'SQL 호출코드';
+		
+		  COMMENT ON COLUMN "SMG_HOME"."TB_PID_TO"."SQL_ID" IS 'SQL ID';
+		
+		  COMMENT ON COLUMN "SMG_HOME"."TB_PID_TO"."MEMO" IS '호출코드 설명(EX: 스마트GI > 사업장관리 > 기본, INSERT)';
+		
+		  COMMENT ON COLUMN "SMG_HOME"."TB_PID_TO"."CNT_YN" IS 'TOTAL CNT 여부';
+		
+		  COMMENT ON COLUMN "SMG_HOME"."TB_PID_TO"."CREATE_DATE" IS '생성일';
+ 
+ 			CREATE SEQUENCE  "SMG_HOME"."PID_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+ 			
+ 			//샘플데이타
+ 			Insert into TB_PID_TO (PID_SEQ,P_ID,SQL_ID,MEMO,CNT_YN,CREATE_DATE) values (0,'AA0000001','sample.selectMsgData_S','샘플 쿼리','N',to_date('15/01/07','RR/MM/DD'));
+	     -->
+		select sql_id
+			from TB_PID_TO
+			where p_id = #p_id#
+
+	</select>
+
+</sqlMap>

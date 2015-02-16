@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <!-- lob Handler -->
+    <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+
+	<!-- SqlMap setup for iBATIS Database Layer -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+	<!-- 아래경로의 모든 sqlMap 로딩하기 -->
+		<property name="mappingLocations">
+            <list>
+                <value>classpath:/egovframework/sql/**/*_SQL.xml</value>
+            </list>
+        </property>
+    <!-- 자동으로 전체 로딩하기 위해 DTD상 적어도 1개는 지정을 해줘야 함.. 단 위에 경로와 중복되지 않아야 함 -->
+		<property name="configLocations">
+            <list>
+                <value>classpath:/egovframework/sql_temp/sql-map-config.xml</value>
+            </list>
+        </property>
+		<property name="dataSource" ref="dataSource-${Globals.DbType}"/>
+		<property name="lobHandler" ref="lobHandler"/>
+	</bean>
+
+			
+</beans>	
